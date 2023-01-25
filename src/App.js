@@ -7,24 +7,20 @@ import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 function App() {
   const [people, setPeople] = useState(data)
   const [index, setIndex] = useState(0);
-  const nextSlide = () => {
-    setIndex((oldIndex) => {
-      let index = oldIndex + 1
-      if (index > people.length - 1) {
-        index = 0
-      }
-      return index
-    })
-  }
-  const prevSlide = () => {
-    setIndex((oldIndex) => {
-      let index = oldIndex - 1
-      if (index < 0) {
-        index = people.length - 1
-      }
-      return index
-    })
-  }
+  
+  const nextPerson = () => {
+    setIndex((index) => {
+      let newIndex = index + 1;
+      return checkNumber(newIndex);
+    });
+  };
+
+  const prevPerson = () => {
+    setIndex((index) => {
+      let newIndex = index - 1;
+      return checkNumber(newIndex);
+    });
+  };
   useEffect(() => {
     let slider = setInterval(() => {
       setIndex((oldIndex) => {
@@ -86,10 +82,10 @@ function App() {
                 <h4>{name}</h4>
                 <p className="title">{title}</p>
                 <p className="text">{quote}</p>
-                <button className='prev' onClick={prevSlide}>
+                <button className='prev' onClick={prevPerson}>
                   <FiChevronLeft />
                 </button>
-                <button className='next' onClick={nextSlide}>
+                <button className='next' onClick={nextPerson}>
                   <FiChevronRight />
                 </button>
                 <button className='suprise_me_button' onClick={randomPerson}>Suprise Me</button>
