@@ -40,6 +40,23 @@ function App() {
     }
   }, [index])
 
+  const checkNumber = (number) => {
+    if (number > people.length - 1) {
+      return 0;
+    }
+    if (number < 0) {
+      return people.length - 1;
+    }
+    return number;
+  };
+
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * people.length);
+    if (randomNumber === index) {
+      randomNumber = index + 1;
+    }
+    setIndex(checkNumber(randomNumber));
+  };
 
   return (
     <section className='section'>
@@ -47,6 +64,7 @@ function App() {
         <h2>
           Our Reviews
         </h2>
+        <div className='underline'></div>
       </div>
       <div className="section-center">
         {
@@ -74,7 +92,7 @@ function App() {
                 <button className='next' onClick={nextSlide}>
                   <FiChevronRight />
                 </button>
-                <button className='suprise_me_button'>Suprise Me</button>
+                <button className='suprise_me_button' onClick={randomPerson}>Suprise Me</button>
               </article>
             )
           })
