@@ -1,41 +1,9 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import data from './data';
-import { FaQuoteRight } from 'react-icons/fa';
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
-
-function App() {
-  const [people, setPeople] = useState(data)
+import React, { useState } from 'react';
+import people from './data';
+import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
+const App = () => {
   const [index, setIndex] = useState(0);
-  
-  const nextPerson = () => {
-    setIndex((index) => {
-      let newIndex = index + 1;
-      return checkNumber(newIndex);
-    });
-  };
-
-  const prevPerson = () => {
-    setIndex((index) => {
-      let newIndex = index - 1;
-      return checkNumber(newIndex);
-    });
-  };
-  useEffect(() => {
-    let slider = setInterval(() => {
-      setIndex((oldIndex) => {
-        let index = oldIndex + 1
-        if (index > people.length - 1) {
-          index = 0
-        }
-        return index
-      })
-    }, 5000)
-    return () => {
-      clearInterval(slider)
-    }
-  }, [index])
-
+  const { name, title, image, text } = people[index];
   const checkNumber = (number) => {
     if (number > people.length - 1) {
       return 0;
@@ -45,7 +13,18 @@ function App() {
     }
     return number;
   };
-
+  const nextPerson = () => {
+    setIndex((index) => {
+      let newIndex = index + 1;
+      return checkNumber(newIndex);
+    });
+  };
+  const prevPerson = () => {
+    setIndex((index) => {
+      let newIndex = index - 1;
+      return checkNumber(newIndex);
+    });
+  };
   const randomPerson = () => {
     let randomNumber = Math.floor(Math.random() * people.length);
     if (randomNumber === index) {
@@ -53,51 +32,39 @@ function App() {
     }
     setIndex(checkNumber(randomNumber));
   };
-
   return (
-    <section className='section'>
-      <div className="title">
-        <h2>
-          Our Reviews
-        </h2>
-        <div className='underline'></div>
+    <main>
+      <section className='container'>
+        <div className='title'>
+          <h2>our reviews</h2>
+          <div className='underline'></div>
+        </div>
+        <article className='review'>
+      <div className='img-container'>
+        <img src={image} alt={name} className='person-img' />
+        <span className='quote-icon'>
+          <FaQuoteRight />
+        </span>
       </div>
-      <div className="section-center">
-        {
-          people.map((person, personIndex) => {
-            const { id, image, name, title, quote } = person;
-            let position = 'nextSlide';
-            if (personIndex === index) {
-              position = 'activeSlide'
-            }
-            if (personIndex === index - 1 || (index === 0 && personIndex === people.length - 1)) {
-              position = 'lastSlide'
-            }
-            return (
-              <article className={position} key={id}>
-                <div className='outer_icon'>
-                  <FaQuoteRight className='icon' />
-                </div>
-                <img src={image} alt={name} className="person-img" />
-                <h4>{name}</h4>
-                <p className="title">{title}</p>
-                <p className="text">{quote}</p>
-                <button className='prev' onClick={prevPerson}>
-                  <FiChevronLeft />
-                </button>
-                <button className='next' onClick={nextPerson}>
-                  <FiChevronRight />
-                </button>
-                <button className='suprise_me_button' onClick={randomPerson}>Suprise Me</button>
-              </article>
-            )
-          })
-        }
-        
-
+      <h4 className='author'>{name}</h4>
+      <p className='job'>{title}</p>
+      <p className='info'>{text}</p>
+      <div className='button-container'>
+        <button className='prev-btn' onClick={prevPerson}>
+          <FaChevronLeft />
+        </button>
+        <button className='next-btn' onClick={nextPerson}>
+          <FaChevronRight />
+        </button>
       </div>
-    </section>
+      <button className='random-btn' onClick={randomPerson}>
+        surprise me
+      </button>
+    </article>
+      </section>
+    </main>
+    
   );
-}
+};
 
 export default App;
