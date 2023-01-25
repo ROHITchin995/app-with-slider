@@ -37,10 +37,10 @@ function App() {
             )
           })
         }
-        <button className="prev">
+        <button onClick={()=>setIndex(index - 1)} className="prev">
           <FiChevronLeft />
         </button>
-        <button className="next">
+        <button onClick={()=>setIndex(index + 1)} className="next">
           <FiChevronRight />
         </button>
         
