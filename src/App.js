@@ -25,20 +25,20 @@ function App() {
       return index
     })
   }
-  // useEffect(() => {
-  //   let slider = setInterval(() => {
-  //     setIndex((oldIndex) => {
-  //       let index = oldIndex + 1
-  //       if (index > people.length - 1) {
-  //         index = 0
-  //       }
-  //       return index
-  //     })
-  //   }, 5000)
-  //   return () => {
-  //     clearInterval(slider)
-  //   }
-  // }, [index])
+  useEffect(() => {
+    let slider = setInterval(() => {
+      setIndex((oldIndex) => {
+        let index = oldIndex + 1
+        if (index > people.length - 1) {
+          index = 0
+        }
+        return index
+      })
+    }, 5000)
+    return () => {
+      clearInterval(slider)
+    }
+  }, [index])
 
 
   return (
@@ -74,10 +74,12 @@ function App() {
                 <button className='next' onClick={nextSlide}>
                   <FiChevronRight />
                 </button>
+                <button className='suprise_me_button'>Suprise Me</button>
               </article>
             )
           })
         }
+        
 
       </div>
     </section>

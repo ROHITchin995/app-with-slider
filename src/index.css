@@ -122,7 +122,7 @@ p {
 /* section */
 .section {
   width: 90vw;
-  margin: 5rem auto;
+  margin: 2rem auto;
   max-width: var(--max-width);
   overflow: hidden;
 }
@@ -254,4 +254,21 @@ article.lastSlide {
 }
 article.nextSlide {
   transform: translateX(100%);
+}
+.suprise_me_button{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1rem;
+  border-color: transparent;
+  color: var(--clr-primary-5);
+  padding: 0.5rem 0;
+  letter-spacing: var(--spacing);
+  transition: var(--transition);
+  border-radius: var(--radius);
+}
+.suprise_me_button:hover{
+  background: var(--clr-primary-5);
+  color: var(--clr-white);
+  cursor: pointer;
 }
